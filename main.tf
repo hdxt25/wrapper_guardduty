@@ -1,0 +1,36 @@
+module "guardduty_wrapper" {
+  source  = "centraluhg.jfrog.io/glb-trf-terraform-rem__aws-ia/guardduty/aws"
+  version = "0.1.0"
+
+  detector_name                  = var.detector_name != null ? var.detector_name : local.guardduty_name
+  replica_region                 = var.replica_region
+  enable_guardduty               = var.enable_guardduty
+  enable_s3_protection           = var.enable_s3_protection
+  enable_rds_protection          = var.enable_rds_protection
+  enable_lambda_protection       = var.enable_lambda_protection
+  enable_malware_protection      = var.enable_malware_protection
+  enable_kubernetes_protection   = var.enable_kubernetes_protection
+  enable_eks_runtime_monitoring  = var.enable_eks_runtime_monitoring
+  enable_ecs_runtime_monitoring  = var.enable_ecs_runtime_monitoring
+  enable_ec2_runtime_monitoring  = var.enable_ec2_runtime_monitoring
+  manage_eks_addon               = var.manage_eks_addon
+  manage_ecs_agent               = var.manage_ecs_agent
+  manage_ec2_agent               = var.manage_ec2_agent
+  enable_snapshot_retention      = var.enable_snapshot_retention
+  finding_publishing_frequency   = var.finding_publishing_frequency
+  filter_config                  = var.filter_config
+  ipset_config                   = var.ipset_config
+  threatintelset_config          = var.threatintelset_config
+  publish_to_s3                  = var.publish_to_s3
+  publishing_config              = var.publishing_config
+  guardduty_s3_bucket            = var.guardduty_s3_bucket
+  guardduty_bucket_acl           = var.guardduty_bucket_acl
+  malware_resource_protection    = var.malware_resource_protection
+  create_malware_protection_role = var.create_malware_protection_role
+  tags = merge(
+    local.tags,
+    {
+      "Name" = var.name == "" ? local.guardduty_name : var.name
+    }
+  )
+}

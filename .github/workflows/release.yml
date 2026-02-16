@@ -1,0 +1,59 @@
+---
+name: Release-Please Workflow
+
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "CODEOWNERS"
+      - "vitals.yml"
+      - "README.md"
+
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: [uhg-runner]
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      version: ${{ steps.release.outputs.version }}
+      major: ${{ steps.release.outputs.major }}
+      minor: ${{ steps.release.outputs.minor }}
+    steps:
+      - name: cleanup # https://github.com/actions/checkout/issues/211
+        run: sudo chown -R "$USER":"$USER" "$GITHUB_WORKSPACE"
+
+      - uses: actions/checkout@v4
+
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.ISE_BOT_PAT }}
+
+      - name: tag major and minor versions
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email omni_platform_gh_bot@optum.com
+          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/googleapis/release-please-action.git"
+          git tag -d v${{ steps.release.outputs.major }} || true
+          git tag -d v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }} || true
+          git push origin :v${{ steps.release.outputs.major }} || true
+          git push origin :v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }} || true
+          git tag -a v${{ steps.release.outputs.major }} -m "Release v${{ steps.release.outputs.major }}"
+          git tag -a v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }} -m "Release v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}"
+          git push origin v${{ steps.release.outputs.major }}
+          git push origin v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}
+
+  publish-artifactory:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    uses: ./.github/workflows/publish-artifactory.yml
+    with:
+      version: ${{ needs.release-please.outputs.version }}
+    secrets: inherit

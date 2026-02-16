@@ -1,0 +1,33 @@
+---
+# Configuration file for MegaLinter
+# See all available variables at https://megalinter.io/configuration/ and in linters documentation
+
+VALIDATE_ALL_CODEBASE: true
+
+SPELL_MISSPELL_DISABLE_ERRORS: true
+
+DISABLE_LINTERS:
+  - SPELL_CSPELL
+  - MARKDOWN_MARKDOWN_LINK_CHECK
+  - MAKEFILE_CHECKMAKE
+  - REPOSITORY_KICS
+  - SPELL_LYCHEE
+  - TERRAFORM_TERRASCAN
+  - JSON_V8R
+  - YAML_V8R
+  - CHECKOV
+
+# Add JSON Linter Configuration to exclude specific file
+JSON_JSONLINT_FILTER_REGEX_EXCLUDE: ".*UHG_AZU_REPORTING_POLICY\\.json$"
+
+# Disable prettier for JSON Files
+JSON_PRETTIER_FILTER_REGEX_EXCLUDE: ".*UHG_AZU_REPORTING_POLICY\\.json$"
+
+REPOSITORY_TRIVY_ARGUMENTS: --ignorefile .trivyignore.yaml --severity HIGH,CRITICAL --skip-dirs github_conf
+MARKDOWN_MARKDOWNLINT_ARGUMENTS:
+  - --disable
+  - MD024 # Disable BugFix heading in CHANGELOG.md lint https://github.com/markdownlint/markdownlint/blob/main/docs/RULES.md#md024---multiple-headers-with-the-same-content
+  - MD013 # Disable line-length
+
+TERRAFORM_TFLINT_UNSECURED_ENV_VARIABLES:
+  - GITHUB_TOKEN

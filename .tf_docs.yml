@@ -1,0 +1,22 @@
+---
+formatter: "markdown table" # this is required
+
+content: |-
+
+  # terraform-omnichannel-ise-aws-wrapper-guardduty
+  #### This module creates an Amazon GuardDuty for the Omnichannel ISE project.
+
+  {{ .Requirements }}
+  {{ .Providers }}
+  {{ .Modules }}
+  {{ .Resources }}
+  {{ .Inputs }}
+  {{ .Outputs }}
+
+output:
+  file: "README.md"
+  mode: replace
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->

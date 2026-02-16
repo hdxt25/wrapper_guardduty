@@ -1,0 +1,33 @@
+---
+name: Deploy TF Module
+
+permissions: {}
+
+"on":
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+
+jobs:
+  deploy-to-artifactory:
+    name: Deploy TF Module to Artifactory
+    runs-on: uhg-runner
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: zip tf module
+        run: |
+          zip -r ${{ inputs.version }}.zip . -x ".git/*" ".github/*" ".idea/*" "*.zip"
+
+      - name: deploy tf module to artifactory
+        uses: optum-omnichannel/ISE_action_collection/actions/tf-module-to-artifactory@v1
+        with:
+          module_name: ise-aws-wrapper-guardduty
+          version: ${{ inputs.version }}
+          file_path: ./${{ inputs.version }}.zip
+          jfrog_token: ${{ secrets.ISE_JFROG_TERRAFORM_TOKEN }}

@@ -1,0 +1,4 @@
+---
+misconfigurations:
+  - id: AVD-AWS-0057
+    statement: Required "*" open resources

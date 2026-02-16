@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+metadata:
+  askId: AIDE_0084550
+  caAgileId:
+  projectKey: com.optum.omni_platform:terraform-omnichannel-ise-aws-wrapper-guardduty
+  projectFriendlyName: TERRAFORM_OMNICHANNEL_ISE_AWS_WRAPPER_GUARDDUTY
+  componentType: code
