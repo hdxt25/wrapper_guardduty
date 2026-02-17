@@ -3,7 +3,7 @@
 ##################################################
 output "guardduty_detector" {
   description = "AWS GuardDuty Detector."
-  value       = aws_guardduty_detector.primary
+  value       = module.guardduty_wrapper.guardduty_detector
 }
 
 ##################################################
@@ -11,7 +11,7 @@ output "guardduty_detector" {
 ##################################################
 output "guardduty_filter" {
   description = "AWS GuardDuty Findings Filters definition."
-  value       = aws_guardduty_filter.this
+  value       = module.guardduty_wrapper.guardduty_filter
 }
 
 ##################################################
@@ -19,7 +19,7 @@ output "guardduty_filter" {
 ##################################################
 output "guardduty_ipset" {
   description = "AWS GuardDuty trusted IPSet configuration."
-  value       = aws_guardduty_ipset.this
+  value       = module.guardduty_wrapper.guardduty_ipset
 }
 
 ##################################################
@@ -27,7 +27,7 @@ output "guardduty_ipset" {
 ##################################################
 output "guardduty_threatintelset" {
   description = "AWS GuardDuty known ThreatIntelSet configuration."
-  value       = aws_guardduty_threatintelset.this
+  value       = module.guardduty_wrapper.guardduty_threatintelset
 }
 
 ##################################################
@@ -35,21 +35,21 @@ output "guardduty_threatintelset" {
 ##################################################
 output "guardduty_publishing" {
   description = "AWS GuardDuty Publishing destination to export findings."
-  value       = aws_guardduty_publishing_destination.this
+  value       = module.guardduty_wrapper.guardduty_publishing
 }
 
 output "guardduty_s3_bucket" {
   description = "Amazon S3 Bucket created for AWS GuardDuty."
-  value       = module.s3_bucket
+  value       = module.guardduty_wrapper.guardduty_s3_bucket
 }
 
 output "guardduty_replica_bucket" {
   description = "Amazon S3 Replica Bucket created for AWS GuardDuty."
-  value       = module.replica_bucket
+  value       = module.guardduty_wrapper.guardduty_replica_bucket
 }
 output "guardduty_log_bucket" {
   description = "Amazon S3 Log Bucket created for AWS GuardDuty."
-  value       = module.log_bucket
+  value       = module.guardduty_wrapper.guardduty_log_bucket
 }
 
 ##################################################
@@ -57,10 +57,10 @@ output "guardduty_log_bucket" {
 ##################################################
 output "guardduty_kms_key" {
   description = "Amazon KMS Key created to encrypt AWS GuardDuty's S3 Bucket."
-  value       = aws_kms_key.guardduty_key
+  value       = module.guardduty_wrapper.guardduty_kms_key
 }
 
 output "guardduty_kms_replica_key" {
   description = "Amazon KMS Key created to encrypt AWS GuardDuty's S3 Replica Bucket."
-  value       = aws_kms_key.replica_key
+  value       = module.guardduty_wrapper.guardduty_kms_replica_key
 }

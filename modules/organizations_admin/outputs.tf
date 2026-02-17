@@ -3,10 +3,10 @@
 ##################################################
 output "guardduty_delegated_admin_account" {
   description = "AWS GuardDuty Delegated Admin account."
-  value       = aws_guardduty_organization_admin_account.this
+  value       = module.guardduty_organizations_admin_wrapper.guardduty_delegated_admin_account
 }
 
 output "guardduty_organization_configuration" {
   description = "AWS GuardDuty Organizations configuration."
-  value       = aws_guardduty_organization_configuration.this
+  value       = module.guardduty_organizations_admin_wrapper.guardduty_organization_configuration
 }

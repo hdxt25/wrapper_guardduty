@@ -3,7 +3,7 @@
 ##################################################
 output "guardduty_member_detector" {
   description = "AWS GuardDuty member detector."
-  value       = aws_guardduty_detector.member
+  value       = module.guardduty_organizations_member.guardduty_member_detector
 }
 
 ##################################################
@@ -11,7 +11,7 @@ output "guardduty_member_detector" {
 ##################################################
 output "guardduty_invite_accepter" {
   description = "AWS GuardDuty Detector invite."
-  value       = aws_guardduty_invite_accepter.member
+  value       = module.guardduty_organizations_member.guardduty_invite_accepter
 }
 
 ##################################################
@@ -19,5 +19,5 @@ output "guardduty_invite_accepter" {
 ##################################################
 output "guardduty_member_configuration" {
   description = "AWS GuardDuty member configuration."
-  value       = aws_guardduty_member.this
+  value       = module.guardduty_organizations_member.guardduty_member_configuration
 }
