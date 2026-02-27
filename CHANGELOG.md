@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/optum-omnichannel/terraform-omnichannel-ise-aws-wrapper-guardduty/compare/v0.1.1...v0.2.0) (2026-02-27)
+
+
+### Features
+
+* tags update ([#5](https://github.com/optum-omnichannel/terraform-omnichannel-ise-aws-wrapper-guardduty/issues/5)) ([2dd96e7](https://github.com/optum-omnichannel/terraform-omnichannel-ise-aws-wrapper-guardduty/commit/2dd96e70f997a533b06860306ca2065abfcc2f94))
+
 ## [0.1.1](https://github.com/optum-omnichannel/terraform-omnichannel-ise-aws-wrapper-guardduty/compare/v0.1.0...v0.1.1) (2026-02-17)
 
 
