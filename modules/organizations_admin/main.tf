@@ -1,5 +1,5 @@
 module "guardduty_organizations_admin_wrapper" {
-  source  = "centraluhg.jfrog.io/glb-trf-terraform-rem__aws-ia/guardduty/aws//modules/organizations_admin"
+  source  = "centraluhg.jfrog.io/omniconnect-platform-tf-provider-vir__aws-ia/guardduty/aws//modules/organizations_admin"
   version = "0.1.0"
 
   guardduty_detector_id            = var.guardduty_detector_id
@@ -17,10 +17,5 @@ module "guardduty_organizations_admin_wrapper" {
   admin_account_id                 = var.admin_account_id
   auto_enable_org_config           = var.auto_enable_org_config
   auto_enable_organization_members = var.auto_enable_organization_members
-  tags = merge(
-    local.tags,
-    {
-      "Name" = var.name == "" ? local.orgadmin_name : var.name
-    }
-  )
+  tags = local.tags
 }

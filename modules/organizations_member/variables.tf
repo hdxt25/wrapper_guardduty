@@ -2,16 +2,6 @@
 # Tagging Standard Variables
 ##########################################
 
-variable "project_path" {
-  description = "Name of the repository creating the resource."
-  type        = string
-}
-
-variable "source_code_repo" {
-  description = "URL of the repository(GitHub repository URL)."
-  type        = string
-}
-
 variable "environment_type" {
   description = "Deployment environment: prd, dev, stg"
   type        = string
@@ -88,9 +78,26 @@ variable "terraform_module_version" {
   default     = "0.1.0"
 }
 
+variable "dr_tier" {
+  description = "Helps identify role of resource in disaster recovery scenarios; active: primary, actively running and serving production traffic / standby: ready-to-go but in passive state and constantly replicating data from the active resource / restoration: exist as definitions (e.g.,Terraform code) with pipelines to create them, except for backup snapshots or database instances with active replication in place"
+  type        = string
+  validation {
+    condition     = contains(["active", "standby", "restoration"], var.dr_tier)
+    error_message = "DR tier must be one of: active, standby, restoration"
+  }
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = map(any)
+  default     = {}
+}
+
+# Terraform Cloud/Enterprise Variables
+variable "tfe_organization" {
+  type        = string
+  description = "Terraform Cloud/Enterprise organization name."
+  default     = "uhg"
 }
 
 ##################################################

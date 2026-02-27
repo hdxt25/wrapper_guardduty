@@ -1,8 +1,8 @@
 module "guardduty_wrapper" {
-  source  = "centraluhg.jfrog.io/glb-trf-terraform-rem__aws-ia/guardduty/aws"
+  source  = "centraluhg.jfrog.io/omniconnect-platform-tf-provider-vir__aws-ia/guardduty/aws"
   version = "0.1.0"
 
-  detector_name                  = var.detector_name != null ? var.detector_name : local.guardduty_name
+  detector_name                  = var.detector_name
   replica_region                 = var.replica_region
   enable_guardduty               = var.enable_guardduty
   enable_s3_protection           = var.enable_s3_protection
@@ -27,10 +27,5 @@ module "guardduty_wrapper" {
   guardduty_bucket_acl           = var.guardduty_bucket_acl
   malware_resource_protection    = var.malware_resource_protection
   create_malware_protection_role = var.create_malware_protection_role
-  tags = merge(
-    local.tags,
-    {
-      "Name" = var.name == "" ? local.guardduty_name : var.name
-    }
-  )
+  tags                           = local.tags
 }
