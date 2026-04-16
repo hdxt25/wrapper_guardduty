@@ -1,6 +1,10 @@
 module "guardduty_wrapper" {
-  source  = "centraluhg.jfrog.io/omniconnect-platform-tf-provider-vir__aws-ia/guardduty/aws"
-  version = "0.1.0"
+  source = "./modules/guardduty_core"
+
+  providers = {
+    aws         = aws
+    aws.replica = aws.replica
+  }
 
   detector_name                  = var.detector_name
   replica_region                 = var.replica_region

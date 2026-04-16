@@ -92,6 +92,19 @@ variable "dr_tier" {
   }
 }
 
+# Optional repository metadata used for tagging.
+variable "project_path" {
+  type        = string
+  description = "Project path used for resource tagging."
+  default     = null
+}
+
+variable "source_code_repo" {
+  type        = string
+  description = "Source code repository URL used for resource tagging."
+  default     = null
+}
+
 # Terraform Cloud/Enterprise Variables
 variable "tfe_organization" {
   type        = string

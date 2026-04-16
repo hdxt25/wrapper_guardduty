@@ -3,9 +3,8 @@ locals {
     regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/CHANGELOG.md"))[0][0],
     null
   )
-  tfe_workspace_name = terraform.workspace
-  project_path       = split("/", data.tfe_workspace.current.vcs_repo[0].identifier)[1]
-  source_code_repo   = "https://github.com/${data.tfe_workspace.current.vcs_repo[0].identifier}"
+  project_path     = coalesce(var.project_path, "unknown")
+  source_code_repo = coalesce(var.source_code_repo, "unknown")
 
   tags = merge(
     var.tags,

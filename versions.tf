@@ -5,10 +5,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = ">= 5.9"
-    }
-    tfe = {
-      source  = "hashicorp/tfe"
-      version = ">= 0.50"
+      configuration_aliases = [aws.replica]
     }
   }
 }

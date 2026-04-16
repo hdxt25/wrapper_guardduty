@@ -1,5 +1,5 @@
 module "guardduty_organizations_admin_wrapper" {
-  source  = "centraluhg.jfrog.io/omniconnect-platform-tf-provider-vir__aws-ia/guardduty/aws//modules/organizations_admin"
+  source  = "aws-ia/guardduty/aws//modules/organizations_admin"
   version = "0.1.0"
 
   guardduty_detector_id            = var.guardduty_detector_id
