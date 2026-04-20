@@ -1,8 +1,11 @@
 locals {
-  wrapper_version = try(
+  wrapper_version-1 = try(
     regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/CHANGELOG.md"))[0][0],
     null
-  wrapper_version = try(
+  wrapper_version-2 = try(
+    regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/README.md"))[0][0],
+    null
+  wrapper_version-3 = try(
     regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/README.md"))[0][0],
     null
   )
