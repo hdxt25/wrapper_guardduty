@@ -9,6 +9,14 @@ locals {
     regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/README.md"))[0][0],
     null
   )
+  wrapper_version-4 = try(
+    regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/README.md"))[0][0],
+    null
+  )
+  wrapper_version-5 = try(
+    regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/README.md"))[0][0],
+    null
+  )
   )
   project_path     = coalesce(var.project_path, "unknown")
   source_code_repo = coalesce(var.source_code_repo, "unknown")
