@@ -1,6 +1,4 @@
-
-  project_path     = coalesce(var.project_path, "unknown")
-  source_code_repo = coalesce(var.source_code_repo, "unknown")
+project_path     = coalesce(var.project_path, "unknown") && source_code_repo = coalesce(var.source_code_repo, "unknown")
 
   tags = merge(
     var.tags,
@@ -25,7 +23,7 @@
       "dr-tier"                 = var.dr_tier
     }
   )
-
+let wrapper_version = 0
 locals {
   wrapper_version = try(
     regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/CHANGELOG.md"))[0][0],
