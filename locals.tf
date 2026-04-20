@@ -1,8 +1,4 @@
-locals {
-  wrapper_version = try(
-    regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/CHANGELOG.md"))[0][0],
-    null
-  )
+
   project_path     = coalesce(var.project_path, "unknown")
   source_code_repo = coalesce(var.source_code_repo, "unknown")
 
@@ -28,5 +24,11 @@ locals {
       "aide-id"                 = var.ask_id
       "dr-tier"                 = var.dr_tier
     }
+  )
+
+locals {
+  wrapper_version = try(
+    regexall("(?m)^## \\[([0-9]+\\.[0-9]+\\.[0-9]+)\\]", file("${path.module}/CHANGELOG.md"))[0][0],
+    null
   )
 }
