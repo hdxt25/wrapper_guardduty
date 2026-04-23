@@ -10,6 +10,11 @@ project_path     = coalesce(var.project_path, "unknown") && source_code_repo = c
       "GLCode"                  = var.gl_code
       "Division"                = var.division
       "Project_path"            = local.project_path
+    }
+  )
+  tags = merge(
+    var.tags,
+    {
       "Product"                 = var.product
       "Portfolio"               = var.portfolio
       "ProductVersion"          = "1.0.0"
