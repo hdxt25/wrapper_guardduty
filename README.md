@@ -1,6 +1,6 @@
 # terraform-omnichannel-ise-aws-wrapper-guardduty
 
-Terraform wrapper module for creating and managing AWS GuardDuty with standardized naming conventions and security configurations.
+Terraform wrapper has module for creating and managing AWS GuardDuty with standardized naming conventions , features and security configurations.
 
 ## Overview
 
